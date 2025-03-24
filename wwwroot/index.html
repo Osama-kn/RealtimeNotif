@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+</head>
+<body>
+    <h2>Real-time Notifications</h2>
+    <div id="notifications"></div>
+
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5072/notificationsHub")
+            .build();
+
+        connection.on("ReceiveNotification", message => {
+            console.log("Nouvelle notification:", message);
+            document.getElementById("notifications").innerHTML += `<p>${message}</p>`;
+        });
+
+        connection.start().then(() => console.log("Connected to SignalR"))
+            .catch(err => console.error(err));
+    </script>
+</body>
+</html>
