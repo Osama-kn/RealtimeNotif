@@ -22,9 +22,7 @@ builder.Services.AddCors(options =>
 // Ajouter SignalR et les services Observer
 builder.Services.AddSignalR();
 builder.Services.AddScoped<WebSocketService>();
-builder.Services.AddScoped<EmailService>();
 builder.Services.AddSingleton<NotificationService>();
-builder.Services.AddSingleton<EmailService>();
 
 var app = builder.Build();
 app.UseCors("AllowAll");
